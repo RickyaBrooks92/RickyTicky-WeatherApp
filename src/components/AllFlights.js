@@ -1,29 +1,16 @@
 import React from "react";
-import useAxios from "../hooks/useAxios";
-import axios from "../apis/flightData";
-const AllFlights = () => {
-  const [flight, error, loading] = useAxios({
-    axiosInstance: axios,
-    method: "GET",
-    url: "/flights",
-    requestConfig: {
-      headers: {
-        "Content-Language": "en-US",
-      },
-    },
-  });
-  return (
-    <div>
-      <h1> Flights</h1>
-      {loading && <p>Loading...</p>}
+import FetchFlights from "../apis/FetchFlights";
 
-      {!loading && error && <p className="errMsg">{error}</p>}
-
-      {!loading && !error && flight && <p>{flight?.flight} </p>}
-
-      {!loading && !error && flight && <p>No Flight to display. </p>}
-    </div>
-  );
-};
+export class AllFlights extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>
+          <FetchFlights />
+        </h1>
+      </div>
+    );
+  }
+}
 
 export default AllFlights;
