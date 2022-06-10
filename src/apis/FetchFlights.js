@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 function FetchFlights() {
+  const [data, setData] = useState([]);
+
   const apiGet = () => {
-    fetch("https://app.goflightlabs.com/flights?access_key=YOUR_ACCESS_KEY")
+    fetch(
+      "http://api.aviationstack.com/v1/flights?access_key=592d9edba6f55d3fe9a1c771a9578bc9&airline_name=Spirit Airlines"
+    )
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((json) => {
+        console.log(json);
+        setData(json);
+      });
   };
+  // useEffect(() => {
+  //   apiGet();
+  // }, []);
 
   return (
     <div>
-      My API <br />
-      <button onClick={apiGet}> Fetch Data</button>
+      My API Flights <br />
+      <button onClick={apiGet}> Fetch Flight Data</button>
+      <br />
+      <pre> {JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 }

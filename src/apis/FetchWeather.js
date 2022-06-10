@@ -11,8 +11,9 @@ function FetchWeather() {
 
   return (
     <div>
-      My API <br />
-      <button onClick={apiGet}> Fetch Data</button>
+      My API Weather
+      <br />
+      <button onClick={apiGet}> Fetch Weather Data</button>
     </div>
   );
 }
