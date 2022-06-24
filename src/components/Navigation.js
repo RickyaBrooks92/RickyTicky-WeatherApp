@@ -1,8 +1,8 @@
 import React from "react";
 import AllFlights from "./AllFlights";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import FetchFlights from "../apis/FetchFlights";
-
+import FetchFlights from "./FetchFlights";
+import CitySearch from "./CitySearch";
 const Navigation = () => {
   return (
     <Router>
@@ -14,6 +14,7 @@ const Navigation = () => {
           <Link to={"/getFlights"}>Get Flight Data</Link>
         </nav>
         <Routes>
+          <Route exact path="/" element={<CitySearch />} />
           <Route exact path="/flights" element={<AllFlights />} />
           <Route exact path="/getFlights" element={<FetchFlights />} />
         </Routes>

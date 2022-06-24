@@ -1,13 +1,12 @@
 import React from "react";
-import FetchFlights from "../apis/FetchFlights";
-import FetchWeather from "../apis/FetchWeather";
-
+import FetchFlights from "./FetchFlights";
+import FetchWeather from "./FetchWeather";
 export class AllFlights extends React.Component {
   render() {
     return (
       <div>
         <h1>
-          <FetchFlights />
+          {/* <FetchFlights /> */}
           <FetchWeather />
         </h1>
       </div>
