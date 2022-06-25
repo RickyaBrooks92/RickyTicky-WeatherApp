@@ -13,9 +13,6 @@ function FetchFlights() {
         setData(json);
       });
   };
-  // useEffect(() => {
-  //   apiGet();
-  // }, []);
 
   return (
     <div>

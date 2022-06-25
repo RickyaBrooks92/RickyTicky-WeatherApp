@@ -1,8 +1,9 @@
 // import { response } from "express";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DisplayWeatherCard from "./DisplayWeatherCard";
-
+import { WeatherContext } from "./Navigation";
 function CitySearch() {
+  const { weatherData, setWeatherData } = React.useContext(WeatherContext);
   const [data, setData] = useState({});
   //   const [isShown, setIsShown] = useState(false);
   let [city, setCity] = useState("");
@@ -27,6 +28,7 @@ function CitySearch() {
     );
     const cityInfoJson = await cityInfoRes.json();
     setData(cityInfoJson);
+    setWeatherData(cityInfoJson);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -40,13 +42,10 @@ function CitySearch() {
     alignItems: "center",
     flexDirection: "column",
   };
-  const h3Header = {
-    display: "flex",
-    justifyContent: "center",
-  };
+
   return (
     <div style={Center}>
-      {console.log(data)}
+      {console.log(weatherData)}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -66,11 +65,7 @@ function CitySearch() {
       </form>
 
       <div className="App">
-        {typeof data.main != "undefined" ? (
-          <DisplayWeatherCard weatherData={data} />
-        ) : (
-          <div></div>
-        )}
+        {typeof data.main != "undefined" ? <DisplayWeatherCard /> : <div></div>}
       </div>
     </div>
   );
