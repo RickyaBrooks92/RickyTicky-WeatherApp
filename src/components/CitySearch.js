@@ -1,10 +1,15 @@
 // import { response } from "express";
 import React, { useEffect, useState } from "react";
+import DisplayWeatherCard from "./DisplayWeatherCard";
 
 function CitySearch() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
+  const [isShown, setIsShown] = useState(false);
   let [city, setCity] = useState("");
   let [state, setState] = useState("");
+  let [CityName, setCityName] = useState("");
+  let [Weather, setWeather] = useState([]);
+  let [CurrentTemp, setCurrentTemp] = useState({});
   const uriEncodedState = encodeURIComponent(state);
   const uriEncodedCity = encodeURIComponent(city);
 
@@ -25,13 +30,22 @@ function CitySearch() {
       .then((res) => res.json())
       .then((result) => {
         setData(result);
+        setCityName(result.name);
+        setCurrentTemp(result.main);
+        setWeather(result.weather[0]);
         console.log(result);
       });
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    apiGetCityData(e);
+    setIsShown((current) => !current);
+  };
+
   return (
     <div>
       {console.log(data)}
-      <form onSubmit={apiGetCityData}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Enter City"
@@ -48,6 +62,14 @@ function CitySearch() {
         />
         <button type="submit"> get weather </button>
       </form>
+      {isShown && (
+        <div>
+          <h2>{CityName}</h2>
+          <h2>{CurrentTemp.temp}</h2>
+          <h2>{Weather.main}</h2>
+        </div>
+      )}
+      {isShown}
     </div>
   );
 }
