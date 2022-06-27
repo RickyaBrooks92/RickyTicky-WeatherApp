@@ -1,9 +1,10 @@
 // import { response } from "express";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DisplayWeatherCard from "./DisplayWeatherCard";
-import { WeatherContext } from "./Navigation";
+import { DataContext } from "./Navigation";
+import "../App.css";
 function CitySearch() {
-  const { weatherData, setWeatherData } = React.useContext(WeatherContext);
+  const { setWeatherData } = React.useContext(DataContext);
   const [data, setData] = useState({});
   //   const [isShown, setIsShown] = useState(false);
   let [city, setCity] = useState("");
@@ -35,17 +36,9 @@ function CitySearch() {
     apiGetCityData(e);
     // setIsShown((current) => !current);
   };
-  const Center = {
-    fontFamily: "Arial",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  };
 
   return (
-    <div style={Center}>
-      {console.log(weatherData)}
+    <div className="Center">
       <form onSubmit={handleSubmit}>
         <input
           type="text"

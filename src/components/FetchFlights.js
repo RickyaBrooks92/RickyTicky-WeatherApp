@@ -1,25 +1,44 @@
 import React, { useState } from "react";
-
+import DisplayFlightCard from "./DisplayFlightCard";
+import { DataContext } from "./Navigation";
+import "../App.css";
 function FetchFlights() {
-  const [data, setData] = useState([]);
+  const { flightData, setFlightData } = React.useContext(DataContext);
+  let [flightNumber, setFlightNumber] = useState("");
 
-  const apiGet = () => {
-    fetch(
-      "http://api.aviationstack.com/v1/flights?access_key=592d9edba6f55d3fe9a1c771a9578bc9&airline_name=Spirit Airlines"
-    )
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setData(json);
-      });
+  const uriEncodedFlightNumber = encodeURIComponent(flightNumber);
+
+  const apiGetPlaneData = async () => {
+    const planeDataRes = await fetch(
+      `http://api.aviationstack.com/v1/flights?access_key=592d9edba6f55d3fe9a1c771a9578bc9&flight_iata=${uriEncodedFlightNumber}&limit=1`
+    );
+    const planeDataJson = await planeDataRes.json();
+    setFlightData(planeDataJson.data[0]);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    apiGetPlaneData();
   };
 
   return (
-    <div>
-      My API Flights <br />
-      <button onClick={apiGet}> Fetch Flight Data</button>
-      <br />
-      <pre> {JSON.stringify(data, null, 2)}</pre>
+    <div className="Center">
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Flight Number"
+          maxLength="50"
+          value={flightNumber}
+          onChange={(e) => setFlightNumber(e.target.value)}
+        />
+      </form>
+      <div className="App">
+        {typeof flightData.airline != "undefined" ? (
+          <DisplayFlightCard />
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 }

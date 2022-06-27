@@ -1,7 +1,7 @@
 import React from "react";
-import { WeatherContext } from "./Navigation";
+import { DataContext } from "./Navigation";
 const DisplayWeatherCard = () => {
-  const { weatherData } = React.useContext(WeatherContext);
+  const { weatherData } = React.useContext(DataContext);
   return (
     <div>
       <p>{weatherData.name}</p>
