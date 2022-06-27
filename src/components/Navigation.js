@@ -19,7 +19,7 @@ const Navigation = () => {
     <DataContext.Provider
       value={{ weatherData, setWeatherData, flightData, setFlightData }}
     >
-      <CenterContext.Provider value={Center}>
+      <CenterContext.Provider value={{ Center }}>
         <Router>
           <div>
             <nav className="Center">

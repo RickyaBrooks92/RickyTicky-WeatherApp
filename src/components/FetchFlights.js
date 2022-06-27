@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import DisplayFlightCard from "./DisplayFlightCard";
-import { DataContext } from "./Navigation";
+import { DataContext, CenterContext } from "./Navigation";
 import "../App.css";
 function FetchFlights() {
   const { flightData, setFlightData } = React.useContext(DataContext);
   let [flightNumber, setFlightNumber] = useState("");
-
+  const { Center } = React.useContext(CenterContext);
   const uriEncodedFlightNumber = encodeURIComponent(flightNumber);
 
   const apiGetPlaneData = async () => {
@@ -22,7 +22,7 @@ function FetchFlights() {
   };
 
   return (
-    <div className="Center">
+    <div style={Center}>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
