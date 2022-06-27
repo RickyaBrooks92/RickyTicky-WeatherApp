@@ -22,7 +22,7 @@ const Navigation = () => {
       <CenterContext.Provider value={{ Center }}>
         <Router>
           <div>
-            <nav className="Center">
+            <nav className="Nav">
               <Link to={"/"}>Current Weather</Link>
               <Link to={"/flights"}>Flights</Link>
             </nav>

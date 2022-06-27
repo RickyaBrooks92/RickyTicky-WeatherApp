@@ -57,7 +57,7 @@ function CitySearch() {
         <button type="submit"> get weather </button>
       </form>
 
-      <div className="App">
+      <div>
         {typeof data.main != "undefined" ? <DisplayWeatherCard /> : <div></div>}
       </div>
     </div>
