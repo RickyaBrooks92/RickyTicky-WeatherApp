@@ -1,17 +1,29 @@
 // import { response } from "express";
-import React, { useState } from "react";
-import DisplayWeatherCard from "./DisplayWeatherCard";
-import { DataContext } from "./Navigation";
-import "../App.css";
+import React, { useEffect, useState } from 'react';
+import DisplayWeatherCard from './DisplayWeatherCard';
+import { DataContext } from './Navigation';
+import '../App.css';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+
 function CitySearch() {
   const { setWeatherData } = React.useContext(DataContext);
   const [data, setData] = useState({});
-  //   const [isShown, setIsShown] = useState(false);
-  let [city, setCity] = useState("");
-  let [state, setState] = useState("");
+  let [city, setCity] = useState('');
+  let [state, setState] = useState('');
+  let [lat, setLat] = useState('');
+  let [lon, setLon] = useState('');
 
   const uriEncodedState = encodeURIComponent(state);
   const uriEncodedCity = encodeURIComponent(city);
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setLat(position.coords.latitude);
+      setLon(position.coords.longitude);
+      console.log(lat, lon);
+    });
+  });
 
   const apiGetCityData = async (e) => {
     e.preventDefault();
@@ -21,7 +33,7 @@ function CitySearch() {
     const latLongJson = await latLongRes.json();
     const cityInfoData = latLongJson[0];
     if (!cityInfoData) {
-      alert("Location not found");
+      alert('Location not found');
       return;
     }
     const cityInfoRes = await fetch(
@@ -38,27 +50,35 @@ function CitySearch() {
   };
 
   return (
-    <div className="Center">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter City"
-          maxLength="50"
-          value={city}
+    <div>
+      <Box
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        component={'form'}
+        onSubmit={handleSubmit}
+        sx={{
+          '& > :not(style)': { m: 1, width: '25ch' },
+        }}
+        noValidate
+        autoComplete='off'
+      >
+        <TextField
+          id='city'
+          label='City'
+          variant='outlined'
           onChange={(e) => setCity(e.target.value)}
         />
-        <input
-          type="text"
-          placeholder="Enter State"
-          maxLength="50"
-          value={state}
+        <TextField
+          id='state'
+          label='State'
+          variant='outlined'
           onChange={(e) => setState(e.target.value)}
         />
-        <button type="submit"> get weather </button>
-      </form>
+      </Box>
 
       <div>
-        {typeof data.main != "undefined" ? <DisplayWeatherCard /> : <div></div>}
+        {typeof data.main != 'undefined' ? <DisplayWeatherCard /> : <div></div>}
       </div>
     </div>
   );

@@ -27,7 +27,6 @@ const Navigation = () => {
           <div>
             <nav className='Nav'>
               <Link to={'/'}>Current Weather</Link>
-              <Link to={'/flights'}>Flights</Link>
             </nav>
             <Routes>
               <Route exact path='/' element={<CitySearch />} />
