@@ -7,17 +7,10 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
 function HomePage() {
-  const {
-    setWeatherData,
-    setLatData,
-    setLonData,
-    lonData,
-    latData,
-    weatherdata,
-  } = React.useContext(DataContext);
+  const { setWeatherData, setLatData, setLonData, lonData, latData } =
+    React.useContext(DataContext);
   const [data, setData] = useState({});
   let [city, setCity] = useState('');
   let [state, setState] = useState('');
@@ -52,17 +45,22 @@ function HomePage() {
     setData(cityInfoJson);
     setWeatherData(cityInfoJson);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     apiGetCityData(e);
+  };
+  const dailyWeatherInfo = () => {
+    return (
+      <div>
+        <DisplayWeatherCard />
+      </div>
+    );
   };
 
   const handleClick = (e) => {
     console.log('hit me');
     e.preventDefault();
-    apiGetFiveDayWeatherForcastData(latData, lonData);
-    console.log(data);
+    dailyWeatherInfo();
   };
 
   const handleClickToday = (e) => {
@@ -100,6 +98,7 @@ function HomePage() {
           variant='outlined'
           onChange={(e) => setState(e.target.value)}
         />
+        <Button type='submit'></Button>
       </Box>
 
       <Stack
