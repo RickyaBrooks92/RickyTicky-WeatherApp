@@ -4,31 +4,40 @@ import DisplayWeatherCard from './DisplayWeatherCard';
 import { DataContext } from './Navigation';
 import '../App.css';
 import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
-
-function CitySearch() {
-  const { setWeatherData } = React.useContext(DataContext);
+import Button from '@mui/material/Button';
+import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
+import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
+function HomePage() {
+  const {
+    setWeatherData,
+    setLatData,
+    setLonData,
+    lonData,
+    latData,
+    weatherdata,
+  } = React.useContext(DataContext);
   const [data, setData] = useState({});
   let [city, setCity] = useState('');
   let [state, setState] = useState('');
-  let [lat, setLat] = useState('');
-  let [lon, setLon] = useState('');
 
   const uriEncodedState = encodeURIComponent(state);
   const uriEncodedCity = encodeURIComponent(city);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      setLat(position.coords.latitude);
-      setLon(position.coords.longitude);
-      console.log(lat, lon);
+      setLatData(position.coords.latitude);
+      setLonData(position.coords.longitude);
+      console.log(lonData, latData);
+      console.log(city);
     });
   });
 
   const apiGetCityData = async (e) => {
     e.preventDefault();
     const latLongRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${uriEncodedCity},${uriEncodedState},3166-2:US &limit=10&appid=ae93a8df4eb012916dd53498f4b2cc0a`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${uriEncodedCity},${uriEncodedState},3166-2:US&limit=10&appid=ae93a8df4eb012916dd53498f4b2cc0a`
     );
     const latLongJson = await latLongRes.json();
     const cityInfoData = latLongJson[0];
@@ -43,10 +52,26 @@ function CitySearch() {
     setData(cityInfoJson);
     setWeatherData(cityInfoJson);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     apiGetCityData(e);
-    // setIsShown((current) => !current);
+  };
+
+  const handleClick = (e) => {
+    console.log('hit me');
+    e.preventDefault();
+    apiGetFiveDayWeatherForcastData(latData, lonData);
+    console.log(data);
+  };
+
+  const handleClickToday = (e) => {
+    console.log('Today Clicked');
+    e.preventDefault();
+    apiGetWeatherCurrentData(latData, lonData).then((data) => {
+      setData(data);
+      setWeatherData(data);
+    });
   };
 
   return (
@@ -77,6 +102,22 @@ function CitySearch() {
         />
       </Box>
 
+      <Stack
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
+        spacing={2}
+      >
+        <Button variant='contained' size='medium'>
+          5-Day Forcast
+        </Button>
+        <Button variant='contained' size='medium' onClick={handleClickToday}>
+          Today's Forcast
+        </Button>
+        <Button variant='contained' size='medium' onClick={handleClick}>
+          Hourly Forcast
+        </Button>
+      </Stack>
       <div>
         {typeof data.main != 'undefined' ? <DisplayWeatherCard /> : <div></div>}
       </div>
@@ -84,4 +125,4 @@ function CitySearch() {
   );
 }
 
-export default CitySearch;
+export default HomePage;

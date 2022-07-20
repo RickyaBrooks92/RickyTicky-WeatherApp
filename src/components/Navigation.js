@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../App.css';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import CitySearch from './CitySearch';
+import HomePage from './HomePage';
 
 export const DataContext = React.createContext();
 export const CenterContext = React.createContext();
@@ -9,7 +9,8 @@ export const CenterContext = React.createContext();
 const Navigation = () => {
   const [weatherData, setWeatherData] = useState({});
   const [flightData, setFlightData] = useState({});
-
+  const [latData, setLatData] = useState('');
+  const [lonData, setLonData] = useState('');
   const Center = {
     fontFamily: 'Arial',
     display: 'flex',
@@ -20,7 +21,16 @@ const Navigation = () => {
 
   return (
     <DataContext.Provider
-      value={{ weatherData, setWeatherData, flightData, setFlightData }}
+      value={{
+        weatherData,
+        setWeatherData,
+        flightData,
+        setFlightData,
+        latData,
+        setLatData,
+        lonData,
+        setLonData,
+      }}
     >
       <CenterContext.Provider value={{ Center }}>
         <Router>
@@ -29,7 +39,7 @@ const Navigation = () => {
               <Link to={'/'}>Current Weather</Link>
             </nav>
             <Routes>
-              <Route exact path='/' element={<CitySearch />} />
+              <Route exact path='/' element={<HomePage />} />
             </Routes>
           </div>
         </Router>
