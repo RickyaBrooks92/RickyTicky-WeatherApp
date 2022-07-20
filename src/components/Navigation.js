@@ -35,9 +35,6 @@ const Navigation = () => {
       <CenterContext.Provider value={{ Center }}>
         <Router>
           <div>
-            <nav className='Nav'>
-              <Link to={'/'}>Current Weather</Link>
-            </nav>
             <Routes>
               <Route exact path='/' element={<HomePage />} />
             </Routes>

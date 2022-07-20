@@ -49,22 +49,12 @@ function HomePage() {
     e.preventDefault();
     apiGetCityData(e);
   };
-  const dailyWeatherInfo = () => {
-    return (
-      <div>
-        <DisplayWeatherCard />
-      </div>
-    );
-  };
 
   const handleClick = (e) => {
-    console.log('hit me');
     e.preventDefault();
-    dailyWeatherInfo();
   };
 
   const handleClickToday = (e) => {
-    console.log('Today Clicked');
     e.preventDefault();
     apiGetWeatherCurrentData(latData, lonData).then((data) => {
       setData(data);
@@ -98,7 +88,9 @@ function HomePage() {
           variant='outlined'
           onChange={(e) => setState(e.target.value)}
         />
-        <Button type='submit'></Button>
+        <Button type='submit' variant='contained' size='medium'>
+          Submit
+        </Button>
       </Box>
 
       <Stack
