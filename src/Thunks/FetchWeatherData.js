@@ -14,3 +14,12 @@ export const apiGetFiveDayWeatherForcastData = async (lat, lon) => {
   console.log(data);
   return data;
 };
+
+export const apiGetHourlyWeatherForcastData = async (lat, lon) => {
+  const weatherRes = await fetch(
+    `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=35&lon=139&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
+  );
+  const data = await weatherRes.json();
+  console.log(data);
+  return data;
+};

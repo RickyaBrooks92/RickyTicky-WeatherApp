@@ -8,6 +8,7 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
+import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
 function HomePage() {
   const { setWeatherData, setLatData, setLonData, lonData, latData } =
     React.useContext(DataContext);
@@ -50,13 +51,17 @@ function HomePage() {
     apiGetCityData(e);
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
-  };
-
   const handleClickToday = (e) => {
     e.preventDefault();
     apiGetWeatherCurrentData(latData, lonData).then((data) => {
+      setData(data);
+      setWeatherData(data);
+    });
+  };
+
+  const handleClickHourly = (e) => {
+    e.preventDefault();
+    apiGetHourlyWeatherForcastData(latData, lonData).then((data) => {
       setData(data);
       setWeatherData(data);
     });
@@ -105,7 +110,7 @@ function HomePage() {
         <Button variant='contained' size='medium' onClick={handleClickToday}>
           Today's Forcast
         </Button>
-        <Button variant='contained' size='medium' onClick={handleClick}>
+        <Button variant='contained' size='medium' onClick={handleClickHourly}>
           Hourly Forcast
         </Button>
       </Stack>
