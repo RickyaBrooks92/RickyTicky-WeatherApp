@@ -71,7 +71,7 @@ function HomePage() {
         component={'form'}
         onSubmit={handleSubmit}
         sx={{
-          '& > :not(style)': { m: 1, width: '25ch' },
+          '& > :not(style)': { m: 1, width: '20ch' },
         }}
         noValidate
         autoComplete='off'
@@ -88,7 +88,7 @@ function HomePage() {
           variant='outlined'
           onChange={(e) => setState(e.target.value)}
         />
-        <Button type='submit' variant='contained' size='medium'>
+        <Button type='submit' variant='contained' size='small'>
           Submit
         </Button>
       </Box>
