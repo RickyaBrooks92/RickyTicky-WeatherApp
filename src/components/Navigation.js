@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import HomePage from './HomePage';
 
 export const DataContext = React.createContext();
 export const CenterContext = React.createContext();
 
 const Navigation = () => {
+  const [fiveDayData, setFiveDayData] = useState({});
   const [weatherData, setWeatherData] = useState({});
   const [flightData, setFlightData] = useState({});
   const [latData, setLatData] = useState('');
@@ -22,6 +23,8 @@ const Navigation = () => {
   return (
     <DataContext.Provider
       value={{
+        fiveDayData,
+        setFiveDayData,
         weatherData,
         setWeatherData,
         flightData,

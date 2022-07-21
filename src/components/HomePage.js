@@ -11,10 +11,19 @@ import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
 import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetCityData } from '../Thunks/FetchWeatherData';
+import FiveDayForcast from './FiveDayForcast';
 function HomePage() {
-  const { setWeatherData, setLatData, setLonData, lonData, latData } =
-    React.useContext(DataContext);
-  const [data, setData] = useState({});
+  const {
+    setWeatherData,
+    setLatData,
+    setLonData,
+    lonData,
+    latData,
+    setFiveDayData,
+    fiveDayData,
+  } = React.useContext(DataContext);
+  let [data, setData] = useState({});
+
   let [city, setCity] = useState('');
   let [state, setState] = useState('');
 
@@ -25,7 +34,6 @@ function HomePage() {
       console.log(lonData, latData);
       localStorage.longData = lonData;
       localStorage.latData = latData;
-      console.log(city);
     });
   });
 
@@ -58,10 +66,7 @@ function HomePage() {
   const handleClickWeek = (e) => {
     e.preventDefault();
     apiGetFiveDayWeatherForcastData(latData, lonData).then((data) => {
-      if (data.main) {
-        setData(data);
-        setWeatherData(data);
-      }
+      setFiveDayData(data);
     });
   };
 
@@ -114,6 +119,9 @@ function HomePage() {
       </Stack>
       <div>
         {typeof data.main != 'undefined' ? <DisplayWeatherCard /> : <div></div>}
+      </div>
+      <div>
+        {typeof fiveDayData != 'undefined' ? <FiveDayForcast /> : <div></div>}
       </div>
     </div>
   );

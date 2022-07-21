@@ -1,13 +1,21 @@
-// import React, { useState } from 'react';
-// import { DataContext } from './Navigation';
+import React, { useState, useEffect } from 'react';
+import { DataContext } from './Navigation';
 
-// function FiveDayForcast() {
-//   const { weatherData, setWeatherData, latData, lonData } =
-//     React.useContext(DataContext);
-//   return (
-//     <div>
-//       <p>{weatherData.name}</p>
-//     </div>
-//   );
-// }
-// export default FiveDayForcast;
+const FiveDayForcast = () => {
+  const { fiveDayData } = React.useContext(DataContext);
+  const [fiveDayArray, setFiveDayArray] = useState([]);
+
+  // const filterData = (object) => {
+  //   const newArray = object.list.filter((data) => {
+  //     return data.dt_txt.includes('12:00:00');
+  //   });
+  //   return newArray;
+  // };
+
+  return (
+    <div>
+      <h1>Five Day Forcast</h1>
+    </div>
+  );
+};
+export default FiveDayForcast;
