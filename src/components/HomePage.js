@@ -9,6 +9,8 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
 import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
+import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
+import { apiGetCityData } from '../Thunks/FetchWeatherData';
 function HomePage() {
   const { setWeatherData, setLatData, setLonData, lonData, latData } =
     React.useContext(DataContext);
@@ -16,39 +18,25 @@ function HomePage() {
   let [city, setCity] = useState('');
   let [state, setState] = useState('');
 
-  const uriEncodedState = encodeURIComponent(state);
-  const uriEncodedCity = encodeURIComponent(city);
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLatData(position.coords.latitude);
       setLonData(position.coords.longitude);
       console.log(lonData, latData);
+      localStorage.longData = lonData;
+      localStorage.latData = latData;
       console.log(city);
     });
   });
 
-  const apiGetCityData = async (e) => {
-    e.preventDefault();
-    const latLongRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${uriEncodedCity},${uriEncodedState},3166-2:US&limit=10&appid=ae93a8df4eb012916dd53498f4b2cc0a`
-    );
-    const latLongJson = await latLongRes.json();
-    const cityInfoData = latLongJson[0];
-    if (!cityInfoData) {
-      alert('Location not found');
-      return;
-    }
-    const cityInfoRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${cityInfoData.lat}&lon=${cityInfoData.lon}&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
-    );
-    const cityInfoJson = await cityInfoRes.json();
-    setData(cityInfoJson);
-    setWeatherData(cityInfoJson);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiGetCityData(e);
+    apiGetCityData(city, state).then((data) => {
+      if (data.main) {
+        setData(data);
+        setWeatherData(data);
+      }
+    });
   };
 
   const handleClickToday = (e) => {
@@ -64,6 +52,16 @@ function HomePage() {
     apiGetHourlyWeatherForcastData(latData, lonData).then((data) => {
       setData(data);
       setWeatherData(data);
+    });
+  };
+
+  const handleClickWeek = (e) => {
+    e.preventDefault();
+    apiGetFiveDayWeatherForcastData(latData, lonData).then((data) => {
+      if (data.main) {
+        setData(data);
+        setWeatherData(data);
+      }
     });
   };
 
@@ -104,7 +102,7 @@ function HomePage() {
         alignItems='center'
         spacing={2}
       >
-        <Button variant='contained' size='medium'>
+        <Button variant='contained' size='medium' onClick={handleClickWeek}>
           5-Day Forcast
         </Button>
         <Button variant='contained' size='medium' onClick={handleClickToday}>
