@@ -11,8 +11,9 @@ export const apiGetFiveDayWeatherForcastData = async (lat, lon) => {
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
   );
   const data = await weatherRes.json();
+  console.log(data);
   const results = data.list.filter((data) => {
-    return data.dt_txt.includes('12:00:00');
+    return data.dt_txt.includes('18:00:00');
   });
   console.log(results);
   return results;

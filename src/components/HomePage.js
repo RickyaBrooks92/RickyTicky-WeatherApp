@@ -12,6 +12,17 @@ import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetCityData } from '../Thunks/FetchWeatherData';
 import FiveDayForcast from './FiveDayForcast';
+export const mapArray = (array) => {
+  return array.map((data) => {
+    return (
+      <div>
+        <h1>{data.dt_txt}</h1>
+        <h1>{data.main.temp}</h1>
+      </div>
+    );
+  });
+};
+
 function HomePage() {
   const {
     setWeatherData,
@@ -23,7 +34,6 @@ function HomePage() {
     fiveDayData,
   } = React.useContext(DataContext);
   let [data, setData] = useState({});
-
   let [city, setCity] = useState('');
   let [state, setState] = useState('');
 
@@ -66,7 +76,9 @@ function HomePage() {
   const handleClickWeek = (e) => {
     e.preventDefault();
     apiGetFiveDayWeatherForcastData(latData, lonData).then((data) => {
-      setFiveDayData(data);
+      if (data) {
+        setFiveDayData(data);
+      }
     });
   };
 
@@ -121,7 +133,11 @@ function HomePage() {
         {typeof data.main != 'undefined' ? <DisplayWeatherCard /> : <div></div>}
       </div>
       <div>
-        {typeof fiveDayData != 'undefined' ? <FiveDayForcast /> : <div></div>}
+        {typeof fiveDayData[2] != 'undefined' ? (
+          <FiveDayForcast />
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );
