@@ -57,6 +57,7 @@ function HomePage() {
         apiGetWeatherCurrentData(data.lat, data.lon).then((data) => {
           setWeatherData(data);
           setData(data);
+          setFiveDayData({});
         });
       }
     });
