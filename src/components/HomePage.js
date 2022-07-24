@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
 import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
-import { apiGetCityData } from '../Thunks/FetchWeatherData';
+import { apiGetCityLatLon } from '../Thunks/FetchWeatherData';
 import FiveDayForcast from './FiveDayForcast';
 export const mapArray = (array) => {
   return array.map((data) => {
@@ -39,20 +39,25 @@ function HomePage() {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      setLatData(position.coords.latitude);
-      setLonData(position.coords.longitude);
-      console.log(lonData, latData);
-      localStorage.longData = lonData;
-      localStorage.latData = latData;
+      if (latData === '' && lonData === '') {
+        setLatData(position.coords.latitude);
+        setLonData(position.coords.longitude);
+        localStorage.lonData = lonData;
+        localStorage.latData = latData;
+      }
     });
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    apiGetCityData(city, state).then((data) => {
-      if (data.main) {
-        setData(data);
-        setWeatherData(data);
+    apiGetCityLatLon(city, state).then((data) => {
+      if (data.name) {
+        setLatData(data.lat);
+        setLonData(data.lon);
+        apiGetWeatherCurrentData(data.lat, data.lon).then((data) => {
+          setWeatherData(data);
+          setData(data);
+        });
       }
     });
   };

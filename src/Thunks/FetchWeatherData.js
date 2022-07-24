@@ -28,20 +28,17 @@ export const apiGetHourlyWeatherForcastData = async (lat, lon) => {
   return data;
 };
 
-export const apiGetCityData = async (city, state) => {
+export const apiGetCityLatLon = async (city, state) => {
   const latLongRes = await fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},3166-2:US&limit=10&appid=ae93a8df4eb012916dd53498f4b2cc0a`
   );
   const latLongJson = await latLongRes.json();
   const cityInfoData = latLongJson[0];
-
   if (!cityInfoData) {
     alert('Location not found');
     return;
+  } else {
+    console.log(cityInfoData, 'cityInfoData');
+    return cityInfoData;
   }
-  const cityInfoRes = await fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${cityInfoData.lat}&lon=${cityInfoData.lon}&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
-  );
-  const cityInfoJson = await cityInfoRes.json();
-  return cityInfoJson;
 };
