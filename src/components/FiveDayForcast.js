@@ -3,6 +3,7 @@ import { DataContext } from './Navigation';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import { Typography } from '@mui/material';
+
 const FiveDayForcast = () => {
   const { fiveDayData } = React.useContext(DataContext);
 
@@ -10,6 +11,9 @@ const FiveDayForcast = () => {
     <Box display='flex' justifyContent='center' alignItems='center'>
       {fiveDayData.map((data) => (
         <Box m={2}>
+          {console.log(
+            new Date(data.dt_txt.substring(0, data.dt_txt.lastIndexOf(' ')))
+          )}
           <Card sx={{ minWidth: 250 }}>
             <Typography sx={{ fontSize: 14, textAlign: 'center' }}>
               {data.dt_txt}

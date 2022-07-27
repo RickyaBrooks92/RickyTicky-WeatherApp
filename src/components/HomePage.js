@@ -8,7 +8,6 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
-import { apiGetHourlyWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
 import { apiGetCityLatLon } from '../Thunks/FetchWeatherData';
 import FiveDayForcast from './FiveDayForcast';
@@ -71,14 +70,6 @@ function HomePage() {
     });
   };
 
-  const handleClickHourly = (e) => {
-    e.preventDefault();
-    apiGetHourlyWeatherForcastData(latData, lonData).then((data) => {
-      setData(data);
-      setWeatherData(data);
-    });
-  };
-
   const handleClickWeek = (e) => {
     e.preventDefault();
     apiGetFiveDayWeatherForcastData(latData, lonData).then((data) => {
@@ -130,9 +121,6 @@ function HomePage() {
         </Button>
         <Button variant='contained' size='medium' onClick={handleClickToday}>
           Today's Forcast
-        </Button>
-        <Button variant='contained' size='medium' onClick={handleClickHourly}>
-          Hourly Forcast
         </Button>
       </Stack>
       <div>
