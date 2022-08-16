@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/RickyTicky-WeatherApp/static/css/main.be05c4c5.css",
-    "main.js": "/RickyTicky-WeatherApp/static/js/main.7147e115.js",
-    "static/js/787.d9312eb8.chunk.js": "/RickyTicky-WeatherApp/static/js/787.d9312eb8.chunk.js",
+    "main.js": "/RickyTicky-WeatherApp/static/js/main.d26aedd3.js",
+    "static/js/787.82d4c8b0.chunk.js": "/RickyTicky-WeatherApp/static/js/787.82d4c8b0.chunk.js",
     "static/media/Clouds.jpg": "/RickyTicky-WeatherApp/static/media/Clouds.b07a60332a34fc6c7090.jpg",
     "index.html": "/RickyTicky-WeatherApp/index.html",
     "main.be05c4c5.css.map": "/RickyTicky-WeatherApp/static/css/main.be05c4c5.css.map",
-    "main.7147e115.js.map": "/RickyTicky-WeatherApp/static/js/main.7147e115.js.map",
-    "787.d9312eb8.chunk.js.map": "/RickyTicky-WeatherApp/static/js/787.d9312eb8.chunk.js.map"
+    "main.d26aedd3.js.map": "/RickyTicky-WeatherApp/static/js/main.d26aedd3.js.map",
+    "787.82d4c8b0.chunk.js.map": "/RickyTicky-WeatherApp/static/js/787.82d4c8b0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.be05c4c5.css",
-    "static/js/main.7147e115.js"
+    "static/js/main.d26aedd3.js"
   ]
 }
