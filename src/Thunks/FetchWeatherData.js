@@ -11,11 +11,11 @@ export const apiGetFiveDayWeatherForcastData = async (lat, lon) => {
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
   );
   const data = await weatherRes.json();
-  console.log(data);
+
   const results = data.list.filter((data) => {
-    return data.dt_txt.includes('18:00:00');
+    return data.dt_txt.includes("18:00:00");
   });
-  console.log(results);
+
   return results;
 };
 
@@ -24,7 +24,7 @@ export const apiGetHourlyWeatherForcastData = async (lat, lon) => {
     `https://pro.openweathermap.org/data/2.5/forecast/hourly?lat=35&lon=139&units=imperial&appid=ae93a8df4eb012916dd53498f4b2cc0a`
   );
   const data = await weatherRes.json();
-  console.log(data);
+
   return data;
 };
 
@@ -35,10 +35,9 @@ export const apiGetCityLatLon = async (city, state) => {
   const latLongJson = await latLongRes.json();
   const cityInfoData = latLongJson[0];
   if (!cityInfoData) {
-    alert('Location not found');
+    alert("Location not found");
     return;
   } else {
-    console.log(cityInfoData, 'cityInfoData');
     return cityInfoData;
   }
 };

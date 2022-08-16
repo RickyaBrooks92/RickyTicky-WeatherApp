@@ -8,8 +8,7 @@ import Box from "@mui/material/Box";
 
 const DisplayWeatherCard = () => {
   const { weatherData } = React.useContext(DataContext);
-  console.log(weatherData);
-  console.log(new Date().getTime());
+
   return (
     <Box
       sx={{
