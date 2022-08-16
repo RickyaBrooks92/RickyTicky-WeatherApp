@@ -9,6 +9,12 @@ const app = express();
 const debug = process.env.NODE_ENV === "test";
 app.use(volleyball.custom({ debug }));
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+}
 // body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
