@@ -17,3 +17,7 @@ a {
   color: black;
   margin-left: 1rem;
 }
+
+.font-link {
+  font-family: 'Lato', sans-serif;
+}
