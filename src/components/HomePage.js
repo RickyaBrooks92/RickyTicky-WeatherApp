@@ -100,6 +100,7 @@ function HomePage() {
           onChange={(e) => setCity(e.target.value)}
         />
         <TextField
+          sx={{ borderColor: "red" }}
           id="state"
           label="State"
           variant="outlined"

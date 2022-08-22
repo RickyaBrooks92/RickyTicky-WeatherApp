@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import '../App.css';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './HomePage';
+import React, { useState } from "react";
+import "../App.css";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./HomePage";
 
 export const DataContext = React.createContext();
 export const CenterContext = React.createContext();
@@ -10,14 +10,14 @@ const Navigation = () => {
   const [fiveDayData, setFiveDayData] = useState({});
   const [weatherData, setWeatherData] = useState({});
   const [flightData, setFlightData] = useState({});
-  const [latData, setLatData] = useState('');
-  const [lonData, setLonData] = useState('');
+  const [latData, setLatData] = useState("");
+  const [lonData, setLonData] = useState("");
   const Center = {
-    fontFamily: 'Arial',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column',
+    fontFamily: "Arial",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
   };
 
   return (
@@ -36,10 +36,10 @@ const Navigation = () => {
       }}
     >
       <CenterContext.Provider value={{ Center }}>
-        <Router>
+        <Router basename="/RickyTicky-WeatherApp">
           <div>
             <Routes>
-              <Route exact path='/' element={<HomePage />} />
+              <Route exact path="/" element={<HomePage />} />
             </Routes>
           </div>
         </Router>

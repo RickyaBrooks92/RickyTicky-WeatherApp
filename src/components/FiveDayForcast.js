@@ -46,7 +46,6 @@ const FiveDayForcast = () => {
               <div Style='font-size: 16px; font-weight: bold; font-family: "Lucida Console", "Courier New", monospace;'>
                 {data.weather[0].main}
               </div>
-              {console.log(data)}
             </Typography>
           </Card>
         </Box>
