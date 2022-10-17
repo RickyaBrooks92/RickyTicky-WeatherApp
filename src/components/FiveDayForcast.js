@@ -6,7 +6,20 @@ import { Typography } from '@mui/material';
 
 const FiveDayForcast = () => {
   const { fiveDayData } = React.useContext(DataContext);
-
+  const Month = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
   return (
     <Box
       display='flex'
@@ -31,7 +44,9 @@ const FiveDayForcast = () => {
           >
             <Typography sx={{ textAlign: 'center' }}>
               <div Style='font-size: 20px; font-weight: bold; font-family: "Lucida Console", "Courier New", monospace;'>
-                {data.dt_txt}
+                {Month[new Date(data.dt * 1000).getMonth()] +
+                  ' ' +
+                  new Date(data.dt * 1000).getDate()}
               </div>
               <div Style='font-size: 20px; font-weight: bold; font-family: "Lucida Console", "Courier New", monospace;'>
                 {data.main.feels_like} &deg;F
