@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/RickyTicky-WeatherApp/static/css/main.be05c4c5.css",
-    "main.js": "/RickyTicky-WeatherApp/static/js/main.7f49d80e.js",
+    "main.js": "/RickyTicky-WeatherApp/static/js/main.462a1c94.js",
     "static/js/787.82d4c8b0.chunk.js": "/RickyTicky-WeatherApp/static/js/787.82d4c8b0.chunk.js",
     "static/media/Clouds.jpg": "/RickyTicky-WeatherApp/static/media/Clouds.b07a60332a34fc6c7090.jpg",
     "index.html": "/RickyTicky-WeatherApp/index.html",
     "main.be05c4c5.css.map": "/RickyTicky-WeatherApp/static/css/main.be05c4c5.css.map",
-    "main.7f49d80e.js.map": "/RickyTicky-WeatherApp/static/js/main.7f49d80e.js.map",
+    "main.462a1c94.js.map": "/RickyTicky-WeatherApp/static/js/main.462a1c94.js.map",
     "787.82d4c8b0.chunk.js.map": "/RickyTicky-WeatherApp/static/js/787.82d4c8b0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.be05c4c5.css",
-    "static/js/main.7f49d80e.js"
+    "static/js/main.462a1c94.js"
   ]
 }
