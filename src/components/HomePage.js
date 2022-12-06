@@ -1,16 +1,17 @@
 // import { response } from "express";
-import React, { useEffect, useState } from "react";
-import DisplayWeatherCard from "./DisplayWeatherCard";
-import { DataContext } from "./Navigation";
-import "../App.css";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-import { apiGetWeatherCurrentData } from "../Thunks/FetchWeatherData";
-import { apiGetFiveDayWeatherForcastData } from "../Thunks/FetchWeatherData";
-import { apiGetCityLatLon } from "../Thunks/FetchWeatherData";
-import FiveDayForcast from "./FiveDayForcast";
+import React, { useEffect, useState } from 'react';
+import DisplayWeatherCard from './DisplayWeatherCard';
+import { DataContext } from './Navigation';
+import '../App.css';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { apiGetWeatherCurrentData } from '../Thunks/FetchWeatherData';
+import { apiGetFiveDayWeatherForcastData } from '../Thunks/FetchWeatherData';
+import { apiGetCityLatLon } from '../Thunks/FetchWeatherData';
+import FiveDayForcast from './FiveDayForcast';
+
 export const mapArray = (array) => {
   return array.map((data) => {
     return (
@@ -33,19 +34,19 @@ function HomePage() {
     fiveDayData,
   } = React.useContext(DataContext);
   let [data, setData] = useState({});
-  let [city, setCity] = useState("");
-  let [state, setState] = useState("");
+  let [city, setCity] = useState('');
+  let [state, setState] = useState('');
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(function (position) {
-      if (latData === "" && lonData === "") {
+      if (latData === '' && lonData === '') {
         setLatData(position.coords.latitude);
         setLonData(position.coords.longitude);
         localStorage.lonData = lonData;
         localStorage.latData = latData;
       }
     });
-  });
+  }, [latData, lonData, setLatData, setLonData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -82,68 +83,68 @@ function HomePage() {
   return (
     <div>
       <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        component={"form"}
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        component={'form'}
         onSubmit={handleSubmit}
         sx={{
-          "& > :not(style)": { m: 1, width: "20ch" },
+          '& > :not(style)': { m: 1, width: '20ch' },
         }}
         noValidate
-        autoComplete="off"
+        autoComplete='off'
       >
         <TextField
-          id="city"
-          label="City"
-          variant="outlined"
+          id='city'
+          label='City'
+          variant='outlined'
           onChange={(e) => setCity(e.target.value)}
         />
         <TextField
-          sx={{ borderColor: "red" }}
-          id="state"
-          label="State"
-          variant="outlined"
+          sx={{ borderColor: 'red' }}
+          id='state'
+          label='State'
+          variant='outlined'
           onChange={(e) => setState(e.target.value)}
         />
         <Button
-          sx={{ backgroundColor: "#5f9ea0" }}
-          type="submit"
-          variant="contained"
-          size="small"
+          sx={{ backgroundColor: '#5f9ea0' }}
+          type='submit'
+          variant='contained'
+          size='small'
         >
           Submit
         </Button>
       </Box>
 
       <Stack
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
+        direction='row'
+        justifyContent='center'
+        alignItems='center'
         spacing={2}
       >
         <Button
-          sx={{ backgroundColor: "#5f9ea0" }}
-          variant="contained"
-          size="medium"
+          sx={{ backgroundColor: '#5f9ea0' }}
+          variant='contained'
+          size='medium'
           onClick={handleClickWeek}
         >
           5-Day Forcast
         </Button>
         <Button
-          sx={{ backgroundColor: "#5f9ea0" }}
-          variant="contained"
-          size="medium"
+          sx={{ backgroundColor: '#5f9ea0' }}
+          variant='contained'
+          size='medium'
           onClick={handleClickToday}
         >
           Today's Forcast
         </Button>
       </Stack>
       <div>
-        {typeof data.main != "undefined" ? <DisplayWeatherCard /> : <div></div>}
+        <DisplayWeatherCard />
       </div>
       <div>
-        {typeof fiveDayData[2] != "undefined" ? (
+        {typeof fiveDayData[2] != 'undefined' ? (
           <FiveDayForcast />
         ) : (
           <div></div>

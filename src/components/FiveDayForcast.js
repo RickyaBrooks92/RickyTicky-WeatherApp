@@ -26,6 +26,8 @@ const FiveDayForcast = () => {
       justifyContent='center'
       alignItems='center'
       alignContent='center'
+      flexWrap='wrap'
+      flexDirection='row'
     >
       {fiveDayData.map((data) => (
         <Box m={2}>
