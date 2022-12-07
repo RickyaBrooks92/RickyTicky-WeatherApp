@@ -141,7 +141,7 @@ function HomePage() {
         </Button>
       </Stack>
       <div>
-        <DisplayWeatherCard />
+        {typeof data.main != 'undefined' ? <DisplayWeatherCard /> : <div></div>}
       </div>
       <div>
         {typeof fiveDayData[2] != 'undefined' ? (
