@@ -1,7 +1,7 @@
 // import { response } from "express";
 import React, { useEffect, useState } from "react";
 import DisplayWeatherCard from "./DisplayWeatherCard";
-import { DataContext } from "./Navigation";
+import { DataContext } from "./App";
 import "../index.css";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
