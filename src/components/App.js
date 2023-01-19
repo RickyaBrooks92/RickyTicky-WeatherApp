@@ -3,6 +3,9 @@ import "../index.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
+console.log(process.env.REACT_APP_WEATHER_API_KEY);
+console.log(process.env.REACT_APP_API_KEY);
+
 export const DataContext = React.createContext();
 export const CenterContext = React.createContext();
 
